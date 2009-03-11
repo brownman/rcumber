@@ -13,7 +13,20 @@
 	<!-- Sam Skin CSS for TabView -->
 	<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/tabview/assets/skins/sam/tabview.css">
 	<script type="text/javascript" src="http://yui.yahooapis.com/2.6.0/build/tabview/tabview-min.js"></script>
+    <script type="text/javascript" src="/javascripts/prototype.js"></script>
+    <script type="text/javascript">
+        function stepPassed(id) {
+          $(id).removeClassName("new").addClassName("passed");
+        }
 
+        function stepPending(id) {
+          $(id).removeClassName("new").addClassName("pending");
+        }
+
+        function stepFailed(id, message, backtrace) {
+          $(id).removeClassName("new").addClassName("failed").insert("<div>" + message + "</div>").insert("<pre>" + backtrace + "</pre>");
+        }
+    </script>
 	<%= render :partial => 'rcumbers/stylesheet' %>
 	
 </head>

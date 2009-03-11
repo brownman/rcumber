@@ -36,7 +36,11 @@ var myTabs = new YAHOO.widget.TabView("demo");
 				<%= render :partial => 'rcumbers/actions' %>
         <h3><%= @rcumber.name %></h3>
 				<hr/>
-        <pre><%= @rcumber.last_results_with_textmate_links.to_s %></pre>
+        <pre>
+          <div id="rcumber_container">
+  <%= @rcumber.last_results.to_s %>
+          </div>
+          </pre>
 				</p></div>
 			<% end %>
 

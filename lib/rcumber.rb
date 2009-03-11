@@ -86,7 +86,8 @@ class Rcumber
   
   def run
     tempfile = Tempfile.new("rcumber")
-    `cucumber #{@path} > #{tempfile.path} 2> #{tempfile.path}`
+    formatters_dir=File.expand_path(File.dirname(__FILE__)) + "/formatters"
+    `cucumber -r #{formatters_dir} #{@path} --format Cucumber::Formatters::RcumberFormatter -p selenium > #{tempfile.path} 2> #{tempfile.path}_error`
     self.last_results = RcumberResults.new(File.read(tempfile.path).to_a)  ## TODO Is to_a necessary?
     
     self.state = :passing
