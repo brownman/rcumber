@@ -5,11 +5,12 @@ INSTALLATION
 
 	- Add to your routes:
 	
-			map.rcumber 'rcumber', :controller => 'rcumbers', :action => 'index' 
-		  map.rcumber_icon 'rcumber_icon', :controller => 'rcumbers', :action => 'rcumber_icon '  
-		  map.resources :rcumbers do |rcumber|
-		    rcumber.run 'run', :controller => 'rcumbers', :action => 'run'
-		  end
+  map.rcumber 'rcumber', :controller => 'rcumbers', :action => 'index'
+  map.rcumber_runall 'rcumber/runall', :controller => 'rcumbers', :action => 'runall'
+  map.rcumber_runmany 'rcumber/run_many', :controller => 'rcumbers', :action => 'run_many'
+  map.resources :rcumbers do |rcumber|
+    rcumber.run 'run', :controller => 'rcumbers', :action => 'run'
+  end
 		
 	- Copy ui/rcumber.gif to the /images directory in your project - recommended for now
 		(until I learn how to intercept requests to "/images" from a plugin...)

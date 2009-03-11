@@ -8,6 +8,7 @@ class RcumbersController < ApplicationController
   include RcumbersHelper
   
   def index
+    get_profiles
     if params[:demos] == "true"
       @rcumbers = Rcumber.demos
     else
@@ -15,7 +16,6 @@ class RcumbersController < ApplicationController
     end
     @rcumber = @rcumbers.first ## TODO: Remove me
   end
-
   def get_rcumber
     id = params[:rcumber_id] ? params[:rcumber_id] : params[:id]
     if params[:demos] == "true"
@@ -23,6 +23,7 @@ class RcumbersController < ApplicationController
     else
       @rcumber = Rcumber.find(id)
     end
+    @rcumber.profile=params[:rcumber][:profile] rescue nil
   end
     
   def show
@@ -45,9 +46,23 @@ class RcumbersController < ApplicationController
     params[:selected_tab] = 'run'
     render :action => 'show'
   end
+  def run_many
+    uids=params[:uids]
+    uids.each do |uid|
+      @rcumber = Rcumber.find(uid)
+      @rcumber.profile=params[:rcumber][:profile] rescue nil
+      @rcumber.run
+    end
+    @rcumbers=Rcumber.all
+    redirect_to :action=>:index
+  end
   
   def runall
-    Rcumber.all.each { |c| c.run }
+    Rcumber.all.each do |c|
+      c.profile=params[:rcumber][:profile] rescue nil
+      c.run
+    end
+
     flash.now[:notice] = "Cucumber test just completed."
     @rcumbers = Rcumber.all
     render :action => 'index'
@@ -131,5 +146,8 @@ class RcumbersController < ApplicationController
       flash.now[:notice] = "Cucumber was pickled!"
       redirect_to :controller => 'rcumbers', :action => 'edit', :id => @rcumber.uid
     end
-
+    def get_profiles
+      @profiles = YAML.load_file("cucumber.yml").keys rescue []
+      
+    end
 end

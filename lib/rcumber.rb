@@ -13,7 +13,7 @@ class Rcumber
   class RcumberResults < Array
   end
       
-  attr_accessor :path, :filename, :raw_content, :name, :preamble, :last_results
+  attr_accessor :path, :filename, :raw_content, :name, :preamble, :last_results, :profile
   
   VALID_STATES = [nil, :passing, :failing, :pending]
   def state
@@ -87,8 +87,9 @@ class Rcumber
   def run
     tempfile = Tempfile.new("rcumber")
     formatters_dir=File.expand_path(File.dirname(__FILE__)) + "/formatters"
-    `cucumber -r #{formatters_dir} #{@path} --format Cucumber::Formatters::RcumberFormatter -p selenium > #{tempfile.path} 2> #{tempfile.path}_error`
-    self.last_results = RcumberResults.new(File.read(tempfile.path).to_a)  ## TODO Is to_a necessary?
+    profile_str="-p #{@profile}"
+    `cucumber -r #{formatters_dir} #{@path} --format Cucumber::Formatters::RcumberFormatter #{profile_str} > #{tempfile.path} 2> #{tempfile.path}_error`
+    self.last_results = RcumberResults.new((File.read(tempfile.path) + "<div id='rcumber_errors'>" + File.read("#{tempfile.path}_error") + "</div>").to_a)  ## TODO Is to_a necessary?
     
     self.state = :passing
     Rails.cache.write("rcumber/#{uid}/state", self.state.to_s)

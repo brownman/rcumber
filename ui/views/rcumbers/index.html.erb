@@ -37,9 +37,13 @@ var myTabs = new YAHOO.widget.TabView("demo");
 						Either create some, or you can look at these <%= link_to 'demo cucumber tests', rcumbers_path + "?demos=true" %> 
 					</p>
 				<% else %>
+                    <% form_for 'rcumber', :url=>{:action=>:run_many} do |f| %>
+                      <div>
+                        <%= label "rcumber","profile","Run Using Profile" %><%= select "rcumber","profile",@profiles.collect {|p| [p,p]} %>
+                      </div>
 					<table class="cucumbers">
 						<thead>
-							<tr><td>Name</td><td>State</td><td>Actions</td></tr>
+                            <tr><td>Name</td><td>State</td><td>Actions</td><td>Run</td></tr>
 						</thead>
 						<tbody>
 						<% @rcumbers.each do |rcumber| %>
@@ -48,14 +52,25 @@ var myTabs = new YAHOO.widget.TabView("demo");
 								<%# rcumber.state = :passing %>
 								<td class="<%= rcumber.state.to_s %>"><%= rcumber.state.to_s %></td>
 								<td>
-									<%= link_to 'run it', rcumber_run_path(rcumber.uid) + demo_parameters %>
-									| <%= link_to 'view', view_rcumber_path(rcumber.uid) + demo_parameters %>
+									
+									 <%= link_to 'view', view_rcumber_path(rcumber.uid) + demo_parameters %>
 									| <%= link_to 'edit', edit_rcumber_path(rcumber.uid) + demo_parameters %>				
 								</td>
+                                <td>
+                                  
+                                  <%= check_box_tag 'uids[]',"#{rcumber.uid}" %>
+                                  
+                                </td>
 							</tr>
 						<% end %>
+                        <tr>
+                                <td colspan="3">&nbsp;</td>
+                                <td><%= f.submit "Run Selected" %> </td>
+
+                        </tr>
 					<tbody>
 					</table>
+                    <% end %>
 				<% end %>
 
 				</div>
