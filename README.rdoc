@@ -15,8 +15,10 @@ Currently, Rcumber is just a simple CRUD viewer for cucumber tests in a rails pr
 
 = Roadmap
 
-  * Whats a Cucumber GUI without its own feature sets. These were referred to as "demos" by the original developer but none were ever written
-  * Fix fatal bugs that currently stop normal usage (See http://westwardwd.lighthouseapp.com/projects/46048-rcumber/tickets)  
+  * Whats a Cucumber GUI without its own feature sets. These were referred to as "demos"
+    by the original developer but none were ever written
+  * Fix fatal bugs that currently stop normal usage
+    (See http://westwardwd.lighthouseapp.com/projects/46048-rcumber/tickets)  
 
 = Installation
 
