@@ -5,6 +5,9 @@ rescue LoadError
   exit
 end
 
+# add view path
+ActionController::Base.prepend_view_path File.join(RAILS_ROOT, %w[vendor plugins rcumber ui views])
+
 plugin_spec_dir = File.dirname(__FILE__)
 ActiveRecord::Base.logger = Logger.new(plugin_spec_dir + "/debug.log")
 

@@ -4,6 +4,7 @@ Feature: Dashboard
   As a stakeholder
   I want a sexy dashboard
 
+  @ok
   Scenario: Viewing when No Cukes Exist
     Given no cukes exist
     When I am on the Dashboard
