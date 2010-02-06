@@ -1,0 +1,42 @@
+= Overview
+
+RCumber is a rails plugin that gives your customers a web interface where they can view, edit and run Cucumber tests directly on your rails project.
+
+This project was originally forked from http://github.com/christophermoura/rcumber by garytaylor(http://github.com/garytaylor/rcumber)
+the original repository has not seen commits since late 2008. The repository this one was forked from has not seen commits since early 2009.
+The licensed developer jgoodsen (http://github.com/jgoodsen) no longer has a public rcumber repository.
+
+As of recent tests with existing rails projects running rails 2.3.5, cucumber 0.6.2 and cucumber-rails 0.2.4 this plugin is not currently usable.
+Check http://westwardwd.lighthouseapp.com/projects/46048-rcumber/overview for a list of know issues and check back for upates
+
+= Current Features
+
+Currently, Rcumber is just a simple CRUD viewer for cucumber tests in a rails project with the ability to run the tests and see the results.
+
+= Roadmap
+
+  * Whats a Cucumber GUI without its own feature sets. These were referred to as "demos" by the original developer but none were ever written
+  * Fix fatal bugs that currently stop normal usage (See http://westwardwd.lighthouseapp.com/projects/46048-rcumber/tickets)  
+
+= Installation
+
+(Note: please read the Overview before installing)
+
+It's simple to add rcumber to your rails project - just install it as plugin into your project:
+
+
+   cd ./vendor/plugins
+   git clone git://github.com/jgoodsen/rcumber.git
+   cd rcumber
+   rake rcumber:install  <-- all this does is copy the nifty cucumber.gif to your /images directory
+
+== Add to your routes
+
+You need to add the following to your routes.rb until I figure out how to bootstrap this in the plugin init process:
+
+  map.rcumber 'rcumber', :controller => 'rcumbers', :action => 'index'
+  map.rcumber_runall 'rcumber/runall', :controller => 'rcumbers', :action => 'runall'
+  map.rcumber_runmany 'rcumber/run_many', :controller => 'rcumbers', :action => 'run_many'
+  map.resources :rcumbers do |rcumber|
+    rcumber.run 'run', :controller => 'rcumbers', :action => 'run'
+  end
