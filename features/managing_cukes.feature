@@ -24,6 +24,7 @@ Feature: Managing Cukes
     And I should see "see all features"
     And I should see the full feature text for "basic"
 
+  @ok
   Scenario: Create Cuke
     Given I am on Show Cuke for basic
     When I follow "new feature"
@@ -31,7 +32,7 @@ Feature: Managing Cukes
     And I fill in "Enter the Feature name:" with "My Feature"
     And I press "Create"
     Then I should be on Edit Cuke for my_feature
-    And I should see "/my_feature"
+    And I should see "/My Feature"
     And the field "rcumber[raw_content]" should contain "Feature: My Feature"
 
   Scenario: Edit Existing Cuke
