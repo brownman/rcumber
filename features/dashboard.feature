@@ -22,6 +22,7 @@ Feature: Dashboard
     And I should see "file1"
     And I should see "file2"
 
+  @ok
   Scenario: Viewing when Cukes Exist w/ Tags at Feature Level (Issue #2)
     Given a cuke "feature_tagged":
       """

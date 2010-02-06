@@ -145,7 +145,7 @@ class Rcumber
         case next_field
         
           when 'name' 
-            if @name = (File.dirname(@path)=~/features\/(.*)/i ? $1 : "") + "/" +  (line =~ /Feature: (.*)/ ? $1 : nil)
+            if @name = (File.dirname(@path)=~/features\/(.*)/i ? $1 : "") + "/" +  (line =~ /Feature: (.*)/ ? $1 : '')
               next_field = 'preamble'
               break
             end
