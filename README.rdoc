@@ -28,7 +28,7 @@ It's simple to add rcumber to your rails project - just install it as plugin int
 
 
    cd ./vendor/plugins
-   git clone git://github.com/jgoodsen/rcumber.git
+   git clone git://github.com/jrwest/rcumber.git
    cd rcumber
    rake rcumber:install  <-- all this does is copy the nifty cucumber.gif to your /images directory
 
