@@ -18,3 +18,8 @@ Given /^a cuke "([^\"]*)":$/ do |basename, feature_text|
   Rcumber.stub(:all).and_return([example])
 end
 
+Then /^I should see the full feature text for "([^\"]*)"$/ do |basename|
+  response.should contain(/#{Rcumber.find_demo(basename).raw_content}/m)
+end
+
+

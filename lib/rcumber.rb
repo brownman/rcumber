@@ -117,9 +117,9 @@ class Rcumber
   end
   
   def self.find_demo(the_uid)
-    return demos.first
+    # return demos.first
     x = demos.detect {|x| x.uid == the_uid }
-    raise "Could not detect cucumber with uid: #{the_uid} in #{demos.inspect}"
+    #raise "Could not detect cucumber with uid: #{the_uid} in #{demos.inspect}"
   end
   
   def self.all

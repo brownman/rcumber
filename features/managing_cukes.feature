@@ -16,12 +16,13 @@ Feature: Managing Cukes
           Given I am a step
       """
 
+  @ok
   Scenario: View Existing Cuke
     Given I am on Show Cuke for basic
     Then I should see "Basic Feature"
     And I should see "run"
     And I should see "see all features"
-    And I should see the full feature text
+    And I should see the full feature text for "basic"
 
   Scenario: Create Cuke
     Given I am on Show Cuke for basic
