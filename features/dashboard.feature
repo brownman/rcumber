@@ -11,6 +11,7 @@ Feature: Dashboard
     Then I should see "You don't have any Cukes in the ./features directory or your project."
     And I should see "Either create some, or you can look at these Demo Cukes"
 
+  @ok
   Scenario: Viewing when Cukes Exist
     Given the cukes "file1,file2"
     When I am on the dashboard
