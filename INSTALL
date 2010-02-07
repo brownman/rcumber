@@ -1,7 +1,20 @@
 INSTALLATION
 ------------
 
-	- Add rcumber as a plugin to your project (clone it from github in your vendor/plugins directory).
+	- Generate RSpec Files -- You will need rspec and rspec-rails installed -- 
+	  (This is recommend but optional unless you wish to run the specs for this plugin)
+	
+	./script/generate spec
+	
+	-Generate Cucumber Files -- You will need cucumber and cucumber rails installed --
+	 (Required)
+	  
+	./script/generate cucumber
+	
+	- Add rcumber as a plugin to your project
+	
+	cd vendor/plugins
+	git clone git://github.com/jrwest/rcumber.git 
 
 	- Add to your routes:
 	
