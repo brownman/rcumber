@@ -39,11 +39,15 @@ Feature: Dashboard
     Then I should be able to select "default" from "Run Using Profile"
     And I should be able to select "empty" from "Run Using Profile"
   
-  @undefined_scenario  
-  Scenario: Selecting a Profile (cucumber.yml contains erb, Issue #7)
-  
-  @undefined_scenario
+  @ok
   Scenario: Viewing Demo Cukes
+    Given no cukes exist
+    And I am on the Dashboard
+    When I follow "Demo Cukes"
+    Then I should see "/Dashboard"
+    When I go to Show Demo for dashboard
+    Then I should see "Feature: Dashboard"
+    And I should see "Scenario: Viewing Demo Cukes"
   
   @undefined_scenario
   Scenario: Running Demo Cukes (Issue #8)

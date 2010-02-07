@@ -3,6 +3,8 @@ def path_to(page_name)
   when /the Dashboard/i
     rcumbers_path
   when /Show Cuke for (.+)/
+    "/rcumbers/#{$1}"
+  when /Show Demo for (.+)/
     "/rcumbers/#{$1}?demos=true"
   when /Edit Cuke for (.+)/
     "/rcumbers/#{$1}/edit"
@@ -23,6 +25,10 @@ When /^I follow "([^\"]*)"$/ do |link|
                           #and this section to stub the saves and reads instead
   end
   click_link link
+end
+
+When /^I go to (.+)$/ do |page_name|
+  visit path_to(page_name)
 end
 
 When /^(?:|I )fill in "([^\"]*)" with "([^\"]*)"$/ do |field, value|
@@ -48,7 +54,7 @@ end
 
 Then /^I should be on (.+)$/ do |page_name|
   current_path = URI.parse(current_url).select(:path).first
-  current_path.should == path_to(page_name).gsub(/\?.*/, '')
+  current_path.should == path_to(page_name)
 end
 
 Then /^the field "([^\"]*)" should contain "([^\"]*)"$/ do |field, value|

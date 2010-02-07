@@ -18,7 +18,7 @@ Feature: Managing Cukes
 
   @ok
   Scenario: View Existing Cuke
-    Given I am on Show Cuke for basic
+    Given I am on Show Demo for basic
     Then I should see "Basic Feature"
     And I should see "run"
     And I should see "see all features"
