@@ -8,11 +8,13 @@ Given /^the cukes "([^\"]*)"$/ do |cukes|
 end
 
 Given /^a cuke "([^\"]*)":$/ do |basename, feature_text|
+  @generated_demos ||= []
   path = File.join(RAILS_ROOT, "vendor", "plugins", "rcumber", "features", "#{basename}.feature")
   example = Rcumber.new
   example.path = path
   example.raw_content = feature_text
-  example.save
+  example.save 
+  @generated_demos << path
   example = Rcumber.new(path)
   example.stub(:name).and_return(basename) #this is a hack because Rcumber.name does not support anything not features/ right now
   Rcumber.stub(:all).and_return([example])
