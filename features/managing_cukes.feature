@@ -35,10 +35,11 @@ Feature: Managing Cukes
     And I should see "/My Feature"
     And the field "rcumber[raw_content]" should contain "Feature: My Feature"
 
+  @ok
   Scenario: Edit Existing Cuke
     Given I am on Show Cuke for basic
     When I follow "edit"
-    Then I should be on Edit Cuke for my_feature
+    Then I should be on Edit Cuke for basic
     When I fill in "rcumber[raw_content]" with
       """
       Feature: Basic Feature

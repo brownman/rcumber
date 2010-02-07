@@ -29,6 +29,11 @@ When /^(?:|I )fill in "([^\"]*)" with "([^\"]*)"$/ do |field, value|
   fill_in(field, :with => value)
 end
 
+When /^I fill in "([^\"]*)" with$/ do |field, multiline_value|
+  fill_in(field, :with => multiline_value)
+end
+
+
 When /^(?:|I )press "([^\"]*)"$/ do |button|
   click_button(button)
 end
@@ -37,9 +42,13 @@ Then /^(?:|I )should see "([^\"]*)"$/ do |text|
   response.should contain(text)
 end
 
+Then /^I should not see "([^\"]*)"$/ do |text|
+  response.should_not contain(text)
+end
+
 Then /^I should be on (.+)$/ do |page_name|
-  current_path = URI.parse(current_url).select(:path, :query).compact.join('?')
-  current_path.should == path_to(page_name)
+  current_path = URI.parse(current_url).select(:path).first
+  current_path.should == path_to(page_name).gsub(/\?.*/, '')
 end
 
 Then /^the field "([^\"]*)" should contain "([^\"]*)"$/ do |field, value|
