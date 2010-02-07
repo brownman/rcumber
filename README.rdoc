@@ -19,7 +19,11 @@ Currently, Rcumber is just a simple CRUD viewer for cucumber tests in a rails pr
     by the original developer but none were ever written
   * Fix fatal bugs that currently stop normal usage
     (See http://westwardwd.lighthouseapp.com/projects/46048-rcumber/tickets) 
-  * Clean some nasty code smells 
+  * Clean some nasty code smells
+  * Fix the install/uninstall process
+  * Prepare for Rails 3
+  * Tag support
+  * Handling of large projects with many features (Running all right now when lots of features exist will take forever) 
 
 = Installation
 
