@@ -49,5 +49,12 @@ Feature: Dashboard
     Then I should see "Feature: Dashboard"
     And I should see "Scenario: Viewing Demo Cukes"
   
-  @undefined_scenario
+  @ok
   Scenario: Running Demo Cukes (Issue #8)
+    Given no cukes exist
+    And I am on the dashboard
+    When I follow "Demo Cukes"
+    And I check "uids_dashboard"
+    And I press "Run Selected"
+    Then I should see "passing"
+  

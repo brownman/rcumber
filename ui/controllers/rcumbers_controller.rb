@@ -49,7 +49,7 @@ class RcumbersController < ApplicationController
   def run_many
     uids=params[:uids]
     uids.each do |uid|
-      @rcumber = Rcumber.find(uid)
+      @rcumber = (params[:demos] && params[:demos] == "true") ? Rcumber.find_demo(uid) : Rcumber.find(uid)
       @rcumber.profile=params[:rcumber][:profile] rescue nil
       @rcumber.run
     end

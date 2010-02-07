@@ -39,6 +39,9 @@ When /^I fill in "([^\"]*)" with$/ do |field, multiline_value|
   fill_in(field, :with => multiline_value)
 end
 
+When /^(?:|I )check "([^\"]*)"$/ do |field|
+  check(field)
+end
 
 When /^(?:|I )press "([^\"]*)"$/ do |button|
   click_button(button)

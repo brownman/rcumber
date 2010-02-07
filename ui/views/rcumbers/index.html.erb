@@ -38,6 +38,9 @@ var myTabs = new YAHOO.widget.TabView("demo");
 					</p>
 				<% else %>
                     <% form_for 'rcumber', :url=>{:action=>:run_many} do |f| %>
+                      <% if params[:demos] && params[:demos] == "true" %>
+                      <%= hidden_field_tag "demos", "true" %>
+                      <% end %>
                       <div>
                         <%= label "rcumber","profile","Run Using Profile" %><%= select "rcumber","profile",@profiles.collect {|p| [p,p]} %>
                       </div>
@@ -58,7 +61,7 @@ var myTabs = new YAHOO.widget.TabView("demo");
 								</td>
                                 <td>
                                   
-                                  <%= check_box_tag 'uids[]',"#{rcumber.uid}" %>
+                                  <%= check_box_tag 'uids[]',"#{rcumber.uid}", false, :id => "uids_#{rcumber.uid}" %>
                                   
                                 </td>
 							</tr>

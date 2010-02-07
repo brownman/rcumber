@@ -30,4 +30,13 @@ describe "rcumbers/index.html.erb" do
       response.should have_selector "a", :content => "Demo Cukes", :href => "/rcumbers?demos=true"
     end
   end
+  context "demo cukes" do
+    it "populates a hidden field to pass on to run many" do
+      assigns[:profiles] = []
+      assigns[:rcumbers] = [mock(Rcumber, :uid => "some_demo", :name => "Some Demo").as_null_object]
+      params[:demos] = "true"
+      render
+      response.should have_selector "input", :type => "hidden", :name => "demos", :value => "true"
+    end
+  end
 end
