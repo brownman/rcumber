@@ -134,7 +134,7 @@ class Rcumber
   def self.profiles
     return [] unless File.exists?(PROFILE_PATH)
     begin
-      YAML.load_file(PROFILE_PATH).keys
+      YAML.load(ERB.new(File.read(PROFILE_PATH)).result).keys
     rescue
       return []
     end

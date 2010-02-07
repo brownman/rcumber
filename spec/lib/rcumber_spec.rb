@@ -89,38 +89,48 @@ ENDL
       end
     end
     
-    describe "Retrieving profiles" do
-      it "checks if cucumber config file exists" do
-        File.should_receive(:exists?).with(Rcumber::PROFILE_PATH)
+  end
+  
+  describe "Retrieving profiles" do
+    it "checks if cucumber config file exists" do
+      File.should_receive(:exists?).with(Rcumber::PROFILE_PATH)
+      Rcumber.profiles
+    end
+    context "when config file exists" do
+      before(:each) do
+        File.stub(:exists).and_return(true)
+      end
+      it "reads the file into memory" do
+        File.should_receive(:read).with(Rcumber::PROFILE_PATH)
         Rcumber.profiles
       end
-      context "when config file exists" do
-        before(:each) do
-          File.stub(:exists).and_return(true)
-        end
-        it "should parse the YAML" do
-          YAML.should_receive(:load_file).with(Rcumber::PROFILE_PATH).and_return({})
-          Rcumber.profiles
-        end
-        context "parse succeeds" do
-          before(:each) do
-            YAML.stub(:load_file).and_return({ "key" => "val", "key2" => "val2" })
-          end
-          it "returns an array of profile strings" do
-            Rcumber.profiles.should == ["key", "key2"]
-          end
-        end
+      it "parses any erb in the file (Issue #7, http://westwardwd.lighthouseapp.com/projects/46048/tickets/7-profile-list-does-not-support-reading-yaml-files-with-erb)" do
+        File.stub(:read).and_return("sometext")
+        ERB.should_receive(:new).with("sometext")
+        Rcumber.profiles
+      end 
+      it "should parse the YAML" do
+        ERB.stub(:new).and_return(mock(ERB, :result => "profile: values"))
+        YAML.should_receive(:load).with("profile: values") #. and_return({"profiles" => "values"})
+        Rcumber.profiles
       end
-      context "when config file does not exist" do
+      context "parse succeeds" do
         before(:each) do
-          File.stub(:exists?).and_return(false)
+          ERB.stub(:new).and_return(mock(ERB, :result => "profile: values"))
         end
-        it "returns an empty array" do
-          Rcumber.profiles.should == []
+        it "returns an array of profile strings" do
+          Rcumber.profiles.should == ["profile"]
         end
       end
     end
+    context "when config file does not exist" do
+      before(:each) do
+        File.stub(:exists?).and_return(false)
+      end
+      it "returns an empty array" do
+        Rcumber.profiles.should == []
+      end
+    end
   end
-  
   
 end
