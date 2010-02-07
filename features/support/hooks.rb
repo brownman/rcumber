@@ -5,7 +5,6 @@ end
 After do
   if @generated_demos
     @generated_demos.each do |file|
-      #puts file
       `rm #{file}`
     end
   end

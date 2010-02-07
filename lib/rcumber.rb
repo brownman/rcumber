@@ -89,7 +89,8 @@ class Rcumber
     tempfile = Tempfile.new("rcumber")
     formatters_dir=File.expand_path(File.dirname(__FILE__)) + "/formatters"
     profile_str="-p #{@profile}"
-    `cucumber -r #{formatters_dir} #{@path} --format Cucumber::Formatters::RcumberFormatter #{profile_str} > #{tempfile.path} 2> #{tempfile.path}_error`
+    #`cucumber -r #{formatters_dir} #{@path} --format Cucumber::Formatters::RcumberFormatter #{profile_str} > #{tempfile.path} 2> #{tempfile.path}_error`
+    `cucumber -v -s #{@path} > #{tempfile.path} 2> #{tempfile.path}_error`
     self.last_results = RcumberResults.new((File.read(tempfile.path) + "<div id='rcumber_errors'>" + File.read("#{tempfile.path}_error") + "</div>").to_a)  ## TODO Is to_a necessary?
     
     self.state = :passing
