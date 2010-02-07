@@ -17,12 +17,24 @@ describe RcumbersController do
       assigns[:rcumbers].should == tests
     end
     
+    describe "profiles" do
+      it "retrieves the profiles" do
+        Rcumber.should_receive(:profiles)
+        get :index
+      end 
+      it "is assigns @profiles" do
+        Rcumber.stub(:profiles).and_return([])
+        get :index
+        assigns[:profiles].should == []
+      end
+    end
+    
   end
 
   describe 'an existing rcumber object responding to ' do
     
     before(:each) do
-      @mock_rcumber = mock Rcumber
+      @mock_rcumber = mock(Rcumber).as_null_object
       Rcumber.should_receive(:find).with("name").and_return(@mock_rcumber)
     end
 

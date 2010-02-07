@@ -57,4 +57,9 @@ Then /^the field "([^\"]*)" should contain "([^\"]*)"$/ do |field, value|
   the_field.value.should =~ /#{value}/
 end
 
+Then /^I should be able to select "([^\"]*)" from "([^\"]*)"$/ do |option, field|
+  select(option, :from => field)
+end
+
+
 

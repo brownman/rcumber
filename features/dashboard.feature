@@ -31,8 +31,9 @@ Feature: Dashboard
       """
     When I am on the Dashboard
     Then I should see "feature_tagged"
-    
-  Scenario: Selecting a Profile
+  
+  @ok  
+  Scenario: Selecting a Profile (Issue #6)
     Given the profiles "default,empty"
     When I am on the dashboard
     Then I should be able to select "default" from "Run Using Profile"
@@ -40,3 +41,9 @@ Feature: Dashboard
   
   @undefined_scenario  
   Scenario: Selecting a Profile (cucumber.yml contains erb, Issue #7)
+  
+  @undefined_scenario
+  Scenario: Viewing Demo Cukes
+  
+  @undefined_scenario
+  Scenario: Running Demo Cukes (Issue #8)

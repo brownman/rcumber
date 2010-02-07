@@ -147,7 +147,6 @@ class RcumbersController < ApplicationController
       redirect_to :controller => 'rcumbers', :action => 'edit', :id => @rcumber.uid
     end
     def get_profiles
-      @profiles = YAML.load_file("cucumber.yml").keys rescue []
-      
+      @profiles = Rcumber.profiles
     end
 end

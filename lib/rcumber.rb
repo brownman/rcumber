@@ -41,6 +41,7 @@ class Rcumber
 
   PATH_PREFIX = RAILS_ROOT + "/features/"
   FEATURE_SUFFIX = ".feature"
+  PROFILE_PATH = File.join(RAILS_ROOT, %w[config cucumber.yml])
 
   def initialize(path=nil)
     load_from_path(path) unless path.nil?
@@ -129,7 +130,15 @@ class Rcumber
   def self.find(the_id)
     all.detect {|x| x.uid == the_id }
   end
-
+  
+  def self.profiles
+    return [] unless File.exists?(PROFILE_PATH)
+    begin
+      YAML.load_file(PROFILE_PATH).keys
+    rescue
+      return []
+    end
+  end
   
   private
   

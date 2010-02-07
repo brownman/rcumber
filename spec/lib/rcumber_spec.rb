@@ -56,7 +56,7 @@ ENDL
     end
     
     it "should have parsed the name" do
-      @rcumber.name.should == "A User Story"
+      @rcumber.name.should == "/A User Story"
     end
     
     it "should return the base filename without an extension as it's test_id" do
@@ -88,7 +88,38 @@ ENDL
         Rcumber.find(@rcumber.uid).uid.should == @rcumber.uid
       end
     end
-  
+    
+    describe "Retrieving profiles" do
+      it "checks if cucumber config file exists" do
+        File.should_receive(:exists?).with(Rcumber::PROFILE_PATH)
+        Rcumber.profiles
+      end
+      context "when config file exists" do
+        before(:each) do
+          File.stub(:exists).and_return(true)
+        end
+        it "should parse the YAML" do
+          YAML.should_receive(:load_file).with(Rcumber::PROFILE_PATH).and_return({})
+          Rcumber.profiles
+        end
+        context "parse succeeds" do
+          before(:each) do
+            YAML.stub(:load_file).and_return({ "key" => "val", "key2" => "val2" })
+          end
+          it "returns an array of profile strings" do
+            Rcumber.profiles.should == ["key", "key2"]
+          end
+        end
+      end
+      context "when config file does not exist" do
+        before(:each) do
+          File.stub(:exists?).and_return(false)
+        end
+        it "returns an empty array" do
+          Rcumber.profiles.should == []
+        end
+      end
+    end
   end
   
   
