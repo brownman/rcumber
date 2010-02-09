@@ -8,6 +8,8 @@ def path_to(page_name)
     "/rcumbers/#{$1}?demos=true"
   when /Edit Cuke for (.+)/
     "/rcumbers/#{$1}/edit"
+  when /Ran Cuke for (.+)/
+    "/rcumbers/#{$1}/run"
   else
     raise "Path not found" 
   end

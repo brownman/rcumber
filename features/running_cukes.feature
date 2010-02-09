@@ -12,8 +12,14 @@ Feature: Running Cukes
         Some Preamble
       """
   
-  @undefined_scenario
+  @ok
   Scenario: From Show Cuke
+    Given I am on Show Cuke for torun
+    When I follow "run"
+    Then I should be on Ran Cuke for torun
+    And I should see "passing"
+    And the run log for "torun" should contain "Feature: To Run"
+    And the run log for "torun" should contain "Some Preamble"
 
   @ok
   Scenario: From Dashboard (1 cuke checked)
